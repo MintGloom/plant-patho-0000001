@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plant Pathology Revision Sheet</title>
+<style>
+:root{--bg:#f6f8f4;--card:#fff;--tx:#1d2a20;--mut:#5d6b60;--ac:#2f7d4f;--ac2:#e8f3ec;--bd:#dde5dc;--pa:#fff4e5;--sy:#fdecec;--mg:#e8f3ec;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111815;--card:#1a241e;--tx:#e6efe8;--mut:#9fb0a4;--ac:#5fc088;--ac2:#203428;--bd:#2c3b31;--pa:#2e2618;--sy:#2e1d1d;--mg:#1d3025}}
+:root[data-theme="dark"]{--bg:#111815;--card:#1a241e;--tx:#e6efe8;--mut:#9fb0a4;--ac:#5fc088;--ac2:#203428;--bd:#2c3b31;--pa:#2e2618;--sy:#2e1d1d;--mg:#1d3025}
+*{box-sizing:border-box}html{scroll-padding-top:150px}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:linear-gradient(135deg,#2f7d4f,#1e5a38);color:#fff;padding:28px 16px 20px;text-align:center}
+header h1{margin:0 0 4px;font-size:clamp(22px,5vw,32px)}header p{margin:0;opacity:.9;font-size:14px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 12px;border-bottom:1px solid var(--bd)}
+.in{max-width:900px;margin:auto}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input{flex:1;min-width:160px;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font-size:15px}
+button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 12px;border-radius:999px;cursor:pointer;font-size:13px}
+button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-top:8px;scrollbar-width:thin}
+.chips button{white-space:nowrap}
+main{max-width:900px;margin:auto;padding:14px 12px 60px}
+h2{margin:26px 0 10px;font-size:18px;color:var(--ac);display:flex;align-items:center;gap:8px}
+h2 span{font-size:12px;background:var(--ac2);padding:2px 8px;border-radius:999px;color:var(--mut)}
+.d{background:var(--card);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.d summary{cursor:pointer;padding:13px 14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:8px}
+.d summary::after{content:"+";color:var(--ac);font-size:20px;line-height:1}
+.d[open] summary::after{content:"\2212"}
+.d summary::-webkit-details-marker{display:none}
+.b{padding:0 12px 12px;display:grid;gap:8px}
+.s{border-radius:10px;padding:9px 12px}
+.s h4{margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.s ul{margin:0;padding-left:18px}.s p{margin:0}
+.p{background:var(--pa)}.y{background:var(--sy)}.m{background:var(--mg)}
+.test .s{cursor:pointer}.test .s.h>*:not(h4){filter:blur(7px);user-select:none}
+.empty{text-align:center;color:var(--mut);padding:30px}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:0 12px 24px}
+@media print{.bar,header p{display:none}.d{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><h1>🌾 Plant Pathology Revision Sheet</h1><p>Field &amp; horticultural crop diseases · Pathogen · Symptoms · IDM</p></header>
+<div class="bar"><div class="in">
+<div class="row"><input id="q" type="search" placeholder="Search disease, pathogen, fungicide…">
+<button id="all">Expand all</button><button id="tm">Test mode</button><button id="th">Theme</button></div>
+<div class="chips" id="chips"></div></div></div>
+<main id="out"></main>
+<footer>Tip: use Test mode to hide answers, tap a box to reveal it. Check fungicide doses against current local recommendations.</footer>
+<script>
+const D=[
+["Rice","Rice blast","Magnaporthe oryzae (syn. Pyricularia oryzae; teleomorph M. grisea), Ascomycota","Spindle/diamond-shaped spots with grey centre and brown margin on leaves;Node blast: nodes blacken and break;Neck blast: neck rots, panicle falls, chaffy grains","Resistant varieties (Tetep, IR-36);Seed treatment: carbendazim or tricyclazole 2 g/kg;Avoid excess N, balanced K;Spray tricyclazole 0.06% or carbendazim 0.1% at tillering and booting;Pseudomonas fluorescens; destroy stubble and weeds"],
+["Rice","False smut (Lakshmi disease)","Ustilaginoidea virens (teleomorph Villosiclava virens)","Individual grains turn into velvety spore balls, orange then olive-green to black;Seen at flowering to grain filling;Sclerotia form in the balls","Use clean seed, avoid late sowing and excess N;Rogue infected panicles;Spray propiconazole 0.1% or copper oxychloride 0.3% at boot leaf and 50% flowering;Deep ploughing to bury sclerotia"],
+["Rice","Bacterial blight (BLB)","Xanthomonas oryzae pv. oryzae (Gram-negative bacterium)","Kresek: wilting of seedlings;Water-soaked yellow streaks from leaf tip along margins, wavy margin, turning straw coloured;Milky bacterial ooze (dew drops) on young lesions","Resistant varieties / Xa genes (Improved Samba Mahsuri);Seed soak: streptomycin sulphate 0.025% + copper;Drain field, avoid excess N and clipping of seedlings;Spray streptocycline 150 ppm + copper oxychloride 0.3%;Bleaching powder 5 kg/ha in irrigation water"],
+["Rice","Brown spot","Bipolaris oryzae (syn. Helminthosporium oryzae; teleomorph Cochliobolus miyabeanus); cause of the Bengal famine 1943","Oval brown spots with grey centre and yellow halo, sesame-seed like;Seedling blight; spots on glumes and grains;Associated with nutrient-poor soil","Balanced nutrition (K, Si, Zn), correct deficiencies;Hot water seed treatment 53–54 °C for 10 min;Thiram or captan 2.5 g/kg seed;Spray mancozeb 0.25%;Tolerant varieties"],
+["Maize","Downy mildew","Peronosclerospora sorghi (also P. philippinensis; crazy top: Sclerophthora macrospora), Oomycete","Chlorotic stripes with white downy growth on both leaf surfaces;Stunting, leaf shredding, sterile tassel;Crazy top: leafy, proliferated tassel","Metalaxyl (Apron 35 SD) 2.5 g/kg seed;Spray mancozeb 0.25% or metalaxyl;Rogue infected plants early; early sowing;Resistant hybrids; rotation; destroy residues"],
+["Maize","Charcoal rot","Macrophomina phaseolina (sclerotial stage: Rhizoctonia bataticola)","Premature wilting after flowering under moisture stress;Lower internodes soft; pith shredded with black sclerotia (charcoal look);Lodging of plants","Avoid moisture stress and high plant density;Balanced K, avoid excess N;Seed treatment carbendazim + Trichoderma viride;Crop rotation; resistant genotypes"],
+["Maize","Southern and Northern corn leaf blight","Southern: Bipolaris maydis (race T, Texas male sterile cytoplasm; race O). Northern: Exserohilum turcicum (syn. Helminthosporium turcicum)","Northern: long elliptical cigar-shaped grey-green lesions, 5–15 cm;Southern: small tan rectangular lesions bounded by veins; race T also infects ear and stalk;Lesions merge, blighting the leaf","Resistant hybrids; avoid Texas male sterile cytoplasm;Spray mancozeb 0.25% or zineb 2.5 kg/ha;Destroy residues, deep ploughing, rotation;Early sowing"],
+["Pearl millet","Rust","Puccinia substriata var. indica (syn. P. penniseti); alternate host Solanum / Tricholaena","Reddish-brown uredopustules mainly on upper leaf surface;Later black teliospores; leaves dry up","Resistant varieties;Spray mancozeb 0.25% or zineb 0.2%, sulphur dust;Destroy volunteer plants and alternate hosts"],
+["Pearl millet","Ergot (sugary disease)","Claviceps fusiformis (conidial stage Sphacelia sorghi)","Honeydew (sticky, sugary) oozes from infected florets;Sclerotia replace grains, dark horn-like;Sclerotia contain toxic alkaloids (ergotamine, ergotoxin)","Sow early so flowering escapes humid weather;Remove sclerotia by 20% brine (salt water) floating;Spray ziram or mancozeb 0.2% from boot to flowering;Resistant varieties; deep ploughing"],
+["Sorghum","Smuts (grain, loose, head, long)","Grain/kernel smut: Sphacelotheca sorghi; loose: S. cruenta; head: S. reiliana; long: Tolyposporium ehrenbergii","Grain smut: grains replaced by cone-shaped sori with grey membrane, hard;Loose smut: sori with thin membrane that ruptures;Head smut: whole panicle converted to a smut mass","Seed treatment: sulphur dust 4 g/kg or carboxin / thiram;Resistant varieties;Crop rotation and destroy infected heads before spore release"],
+["Sorghum","Ergot (sugary disease)","Claviceps africana (conidial stage Sphacelia sorghi)","Honeydew with sticky white masses on panicle, later black sooty growth;Sclerotia in place of grains;Seed set reduced in male-sterile lines","Early sowing, avoid flowering in rainy period;Spray ziram or mancozeb 0.2% at boot to flowering;Brine floating of seed;Resistant lines"],
+["Sorghum","Anthracnose","Colletotrichum sublineolum (syn. C. graminicola)","Circular spots with tan/red centre and dark margin, acervuli with setae;Red rot of midrib and stalk rot;Red spots on grains and panicle","Resistant varieties;Seed treatment thiram or captan 3 g/kg;Spray mancozeb 0.25%;Crop rotation; destroy residues"],
+["Tobacco","Damping off","Pythium aphanidermatum (also Phytophthora, Rhizoctonia)","Nursery seedlings: water-soaked collar region, seedlings topple;Patches of dead seedlings in the bed","Raised beds, good drainage, thin sowing;Soil solarization / burning of trash;Drench Bordeaux mixture 1% or metalaxyl;Seed treatment Trichoderma viride"],
+["Tobacco","Black shank","Phytophthora parasitica var. nicotianae (Oomycete)","Black lesion at stem base extending upward;Pith dried and shrunken in discs (discoid, like stacked plates);Lower leaves yellow and wilt; root rot","Resistant varieties;Rotation of 3–4 years with non-hosts;Soil drench metalaxyl / Ridomil;Avoid waterlogging and injuries"],
+["Pigeon pea","Wilt","Fusarium udum (syn. F. oxysporum f.sp. udum)","Yellowing and drooping of leaves, partial or complete wilt;Purple band on stem base; xylem shows internal browning;Branch-wise wilting","Resistant varieties (ICP 8863 Maruti, BDN-1);Seed treatment carbendazim + thiram or Trichoderma viride 4 g/kg;Intercrop with sorghum; crop rotation;Soil solarization; avoid ratooning"],
+["Pigeon pea","Sterility mosaic disease (SMD)","Pigeonpea sterility mosaic virus (PPSMV, Emaravirus); vector eriophyid mite Aceria cajani","Bushy, stunted pale green plants;Small mosaic leaves; no flowers or pods (sterile);Mites spread by wind","Resistant varieties (ICPL 87119 Asha, Bahar);Rogue infected plants early;Spray dicofol or wettable sulphur 0.2% for mites;Avoid ratoon crop and volunteer plants"],
+["Green gram","Powdery mildew","Erysiphe polygoni (Ascomycota)","White powdery growth on leaves, stems and pods;Leaves yellow and dry; premature defoliation","Resistant varieties (ML 267);Dust sulphur 25 kg/ha or wettable sulphur 0.2%;Spray carbendazim 0.1% or dinocap 0.1%;Early sowing"],
+["Green gram","Rust","Uromyces phaseoli var. vignae (syn. U. appendiculatus)","Reddish-brown pustules (uredia) mainly on lower leaf surface;Severe cases: premature defoliation","Resistant varieties;Spray mancozeb 0.2% or hexaconazole 0.1%;Destroy crop debris; rotation"],
+["Groundnut","Tikka (leaf spot) disease","Early leaf spot: Cercospora arachidicola (Mycosphaerella arachidis); late leaf spot: Phaeoisariopsis personata (M. berkeleyi)","Early: circular brown spots with yellow halo, mainly on upper surface;Late: dark black spots on lower surface, no prominent halo;Defoliation, reduced pod yield and haulm quality","Resistant varieties; seed treatment;Spray carbendazim 0.05%, chlorothalonil 0.2% or mancozeb 0.2%: 2–3 sprays at 15-day intervals from 30 DAS;Destroy debris; rotation; early sowing"],
+["Sesame","Phyllody","Candidatus Phytoplasma (Mollicute); vector leafhopper Orosius albicinctus","Floral parts turn into green leaf-like structures;Short internodes, witches broom, no capsules (sterility);Whole plant stunted","Rogue diseased plants early;Control vector: imidacloprid or dimethoate 0.03%;Early sowing; resistant varieties;Weed removal; rotation"],
+["Banana","Panama wilt (Fusarium wilt)","Fusarium oxysporum f.sp. cubense (race 1, 2, 4; TR4 on Cavendish)","Yellowing of older leaves from margins; petioles break and leaves hang like a skirt;Vascular browning in pseudostem and corm;Gros Michel highly susceptible","Resistant Cavendish (for race 1); disease-free tissue culture suckers;Sucker dip in carbendazim 0.1%;Corm injection carbendazim 3%; Trichoderma + neem cake;Flooding fallow; liming; quarantine"],
+["Banana","Moko wilt (bacterial wilt)","Ralstonia solanacearum race 2 (biovar 1)","Yellowing and wilting of youngest leaves first, petiole collapse;Bacterial ooze from cut pseudostem;Internal brown dry rot of fruit; blackening of male bud","Quarantine, uproot and destroy infected plants;Disinfect tools; remove male buds (insect transmission);Use disease-free suckers; fallow; resistant clones"],
+["Banana","Sigatoka disease","Yellow: Mycosphaerella musicola (Pseudocercospora musae); Black: M. fijiensis","Pale yellow streaks turn into brown/black spots with yellow halo and grey centre;Leaf necrosis, premature ripening of fruit","Remove and burn infected leaves;Spray propiconazole 0.1% + mineral oil, mancozeb 0.25% or carbendazim;Good spacing and drainage; tolerant varieties"],
+["Banana","Cigar end rot","Verticillium theobromae (syn. Trachysphaera fructigena)","Dry rot starting at fruit tip, ash-grey fungal growth like a cigar ash;Fruit tip shrivels, dry and hard","Remove floral remnants (dried perianth) by hand;Cover bunches with polythene sleeves;Spray carbendazim or mancozeb at bunch emergence;Field sanitation"],
+["Papaya","Papaya ring spot (PRSV)","Papaya ringspot virus, Potyvirus; non-persistent transmission by aphids (Myzus persicae, Aphis gossypii)","Mosaic, chlorosis, leaf distortion (shoestring);Water-soaked oily streaks on petioles and stem;Concentric ring spots on fruits","Rogue infected plants; avoid growing cucurbits near;Border crops (maize); reflective mulch;Spray mineral oil / dimethoate for aphids;Tolerant lines; transgenic (Rainbow), cross protection"],
+["Papaya","Papaya leaf curl virus (PaLCuV)","Begomovirus (Geminiviridae); vector whitefly Bemisia tabaci","Leaves curl upward/downward, vein thickening, enations;Leaves reduced and brittle, stunted plant, poor fruiting","Rogue infected plants;Whitefly control: imidacloprid 0.05%, neem oil, yellow sticky traps;Barrier crops; net-house nursery; tolerant lines"],
+["Guava","Red rust / Algal leaf spot","Cephaleuros virescens (parasitic green alga)","Reddish-orange velvety circular spots on leaves and twigs;Spots become scabby, leaf drop in humid weather","Improve drainage; prune for aeration;Spray copper oxychloride 0.3% or Bordeaux 1%;Balanced nutrition"],
+["Guava","Guava scab","Pestalotiopsis psidii (syn. Pestalotia psidii)","Raised corky brown scabs on green fruits;Cracking, hardening and malformation of fruit","Remove and burn diseased fruits;Spray Bordeaux 1% or copper oxychloride 0.3%, carbendazim;Bagging of young fruits"],
+["Pomegranate","Alternaria blight (heart rot)","Alternaria alternata","Brown leaf spots with yellow halo;Fruit: internal black rot of arils from calyx end, outer fruit looks healthy","Sanitation, remove diseased fruits and leaves;Spray mancozeb 0.25%, carbendazim 0.1% or azoxystrobin;Avoid wetting flowers; fruit bagging"],
+["Tomato / Potato","Early blight","Alternaria solani","Brown spots with concentric rings (target board effect) and yellow halo;Collar rot in seedlings; dark sunken stem-end fruit rot;Tuber: dark sunken lesions","Seed treatment thiram 3 g/kg;Spray mancozeb 0.25% or chlorothalonil 0.2%, azoxystrobin;Resistant varieties; rotation; destroy debris;Trichoderma viride"],
+["Tomato / Potato","Late blight","Phytophthora infestans (Oomycete); cause of the Irish famine 1845","Water-soaked lesions turning brown/black, white downy growth beneath leaf in humid weather;Greasy brown fruit rot; tubers with reddish-brown dry rot;Whole crop may collapse in days","Resistant varieties (Kufri Jyoti, Kufri Bahar);Certified seed; earthing up; destroy cull piles;Prophylactic mancozeb 0.2%; curative metalaxyl + mancozeb (Ridomil MZ) 0.25%, cymoxanil;Haulm cutting 10 days before harvest; forecasting (Indo-Blightcast)"],
+["Brinjal","Phomopsis blight / fruit rot","Phomopsis vexans (teleomorph Diaporthe vexans)","Damping-off of seedlings; circular grey-brown leaf spots with pycnidia;Soft sunken fruit rot, stem canker","Seed treatment hot water 50 °C 30 min or thiram;Spray carbendazim 0.1% or mancozeb 0.25%;Resistant varieties (Pusa Purple Cluster); rotation, sanitation"],
+["Brinjal","Little leaf","Candidatus Phytoplasma trifolii; vector leafhopper Hishimonas phycitis","Leaves small, short petioles, shortened internodes;Floral parts become leafy, bushy growth, no fruit","Rogue infected plants;Spray dimethoate 0.05% or imidacloprid for vector;Tetracycline 500 ppm; control weed hosts; resistant lines (Solanum gilo)"],
+["Crucifers","White rust","Albugo candida (Oomycete)","White blister-like pustules on lower leaf surface;Stag-head on mustard inflorescence (with Peronospora parasitica);Hypertrophy and malformation of floral parts","Seed treatment metalaxyl (Apron 35SD) 6 g/kg;Spray mancozeb 0.2% or metalaxyl 0.25%;Destroy weeds (Capsella), rotation; early sowing; tolerant varieties"],
+["Crucifers","Club root","Plasmodiophora brassicae (obligate protist, Plasmodiophoromycete)","Galls: swollen, club-shaped roots;Stunting, midday wilting, yellowing;Favoured by acid soil and wet conditions","Liming to pH 7.2 (hydrated lime);Rotation of 6–7 years with non-crucifers;Resistant varieties; avoid acidic soil, improve drainage;Drench fluazinam or Bordeaux; remove infected plants"],
+["Crucifers","Alternaria blight","Alternaria brassicae, A. brassicicola","Dark spots with concentric rings on leaves and pods;Premature pod shattering, shrivelled seeds","Seed treatment thiram or hot water 50 °C 30 min;Spray mancozeb or iprodione 0.2%;Early sowing; resistant varieties; sanitation"],
+["Coconut","Stem bleeding","Thielaviopsis paradoxa (syn. Ceratocystis paradoxa)","Reddish-brown liquid oozes from cracks in the stem;Tissue below turns yellow then black, decays;Crown shrinks, leaves yellow","Chisel out diseased tissue; apply hexaconazole 5% or Bordeaux paste / coal tar;Root feeding hexaconazole; Trichoderma + neem cake;Avoid injury; proper irrigation and nutrition"],
+["Coconut","Tanjore (Thanjavur) wilt","Ganoderma lucidum (also G. applanatum), basal stem rot","Drooping and yellowing of outer whorl leaves;Bleeding at stem base, bracket-shaped fruiting bodies;Crown dries and palm dies","Isolate diseased palms with trench; remove dead palms;Root feeding hexaconazole 2% or tridemorph;Trichoderma + neem cake; Bordeaux paste on stem;Good drainage, avoid injuries"],
+["Coconut","Cadang-cadang","Coconut cadang-cadang viroid (CCCVd), Philippines","Yellow oily spots on leaves, bright yellow crown;Nuts small, rounded, scarified, nut set stops;Palm dies in 8–15 years","No cure; remove and destroy infected palms;Quarantine, use certified seed nuts and resistant lines"],
+["Coffee","Rust","Hemileia vastatrix (Ceylon 1869)","Orange-yellow powdery uredospores on lower leaf surface;Premature leaf fall, die-back, poor yield","Resistant varieties (S.795, Cauvery, Chandragiri);Spray Bordeaux 1%, copper oxychloride 0.3%;Triadimefon, hexaconazole 0.1% or propiconazole;Shade regulation, pruning"],
+["Coffee","Black rot (Koleroga)","Koleroga noxia (syn. Pellicularia koleroga)","Leaves rot and hang from twigs on mycelial threads;Black shiny mass on leaves, branches, berries;Monsoon season disease","Bordeaux 1% before monsoon;Remove hanging leaves; regulate shade;Copper oxychloride 0.3%; prune dense areas"],
+["Coffee","Berry blotch","Cercospora coffeicola (brown eye spot)","Leaf spots with yellow halo (brown eye);Berries show dark brown sunken blotches, poor bean quality","Bordeaux 1% or copper fungicides; carbendazim;Shade regulation, balanced nutrition; nursery management"],
+["Tea","Algal leaf spot","Cephaleuros parasiticus (parasitic alga)","Circular, velvety orange-rusty spots on leaves and stems;Stem cracking, bark death","Improve drainage; proper K and Mg nutrition;Prune for aeration;Spray copper oxychloride 0.3%"],
+["Tea","Blister blight","Exobasidium vexans (Basidiomycota)","Translucent pale spots then circular blisters, concave above and whitish below;Young leaves and shoots affected; disease in humid cool weather","Weekly copper oxychloride 0.2%;Hexaconazole or propiconazole systemic;Shorter plucking round; shade regulation; resistant clones"],
+["Tea","Horse hair blight","Marasmius equicrinis","Black hair-like rhizomorphs on stems and branches;Leaf necrosis and defoliation","Prune and burn infected twigs;Spray copper fungicides 0.3%;Reduce shade; sanitation"]
+];
+const $=id=>document.getElementById(id);let crop="All",test=false;
+const crops=["All",...new Set(D.map(d=>d[0]))];
+$("chips").innerHTML=crops.map(c=>`<button data-c="${c}" class="${c=="All"?"on":""}">${c}</button>`).join("");
+const li=s=>"<ul>"+s.split(";").map(x=>`<li>${x.trim()}</li>`).join("")+"</ul>";
+function render(){
+const t=$("q").value.toLowerCase().trim();let h="",last="",n=0;
+D.forEach(d=>{
+if(crop!="All"&&d[0]!=crop)return;
+if(t&&!d.join(" ").toLowerCase().includes(t))return;
+if(d[0]!=last){const c=D.filter(x=>x[0]==d[0]).length;h+=`<h2>${d[0]} <span>${c} diseases</span></h2>`;last=d[0]}
+n++;
+h+=`<details class="d"><summary>${d[1]}</summary><div class="b">
+<div class="s p ${test?"h":""}"><h4>Pathogen</h4><p>${d[2]}</p></div>
+<div class="s y ${test?"h":""}"><h4>Symptoms</h4>${li(d[3])}</div>
+<div class="s m ${test?"h":""}"><h4>Management (IDM)</h4>${li(d[4])}</div></div></details>`});
+$("out").className=test?"test":"";
+$("out").innerHTML=n?h:'<div class="empty">No disease found.</div>'}
+$("q").oninput=render;
+$("chips").onclick=e=>{const c=e.target.dataset.c;if(!c)return;crop=c;[...$("chips").children].forEach(b=>b.classList.toggle("on",b.dataset.c==c));render()};
+$("out").onclick=e=>{const s=e.target.closest(".s");if(s&&test)s.classList.toggle("h")};
+let open=false;$("all").onclick=()=>{open=!open;document.querySelectorAll(".d").forEach(d=>d.open=open);$("all").textContent=open?"Collapse all":"Expand all"};
+$("tm").onclick=()=>{test=!test;$("tm").classList.toggle("on",test);render();if(test)document.querySelectorAll(".d").forEach(d=>d.open=true)};
+$("th").onclick=()=>{const r=document.documentElement,dk=matchMedia("(prefers-color-scheme: dark)").matches;const cur=r.dataset.theme||(dk?"dark":"light");r.dataset.theme=cur=="dark"?"light":"dark"};
+render();
+</script>
+</body>
+</html>
